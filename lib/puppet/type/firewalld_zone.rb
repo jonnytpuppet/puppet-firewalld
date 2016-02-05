@@ -57,6 +57,32 @@ Puppet::Type.newtype(:firewalld_zone) do
 
   newproperty(:target) do
     desc "Specify the target for the zone"
+
+    munge do |val|
+      val = 'REJECT' if val.eql?('%%REJECT%%')
+    end
+
+    # Older versions only accept %%REJECT%%
+    munge do |value|
+      if value.eql?('REJECT')
+        '%%REJECT%%'
+      else
+        value
+      end
+    end
+
+    # We assume that %%REJECT%% and REJECT are equal
+    def insync?(is)
+      if should.eql?('%%REJECT%%') || should.eql?('REJECT')
+        if is.eql?('%%REJECT%%') || is.eql?('REJECT')
+          true
+        else
+          false
+        end
+      else
+        is == should
+      end
+    end
   end
 
   newproperty(:interfaces, :array_matching => :all) do

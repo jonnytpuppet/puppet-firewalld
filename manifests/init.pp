@@ -26,7 +26,7 @@
 #
 #
 class firewalld (
-  $packages       = [ 'firewalld', 'firewall-config' ],
+  $packages       = [ 'firewalld' ],
   $package_ensure = 'installed',
   $service_ensure = 'running',
   $service_enable = true,

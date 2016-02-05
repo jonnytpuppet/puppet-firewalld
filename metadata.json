@@ -9,6 +9,10 @@
     {
     "operatingsystem":"RedHat",
     "operatingsystemrelease":[ "7" ]
+    },
+    {
+    "operatingsystem":"Debian",
+    "operatingsystemrelease":[ "8" ]
     }
    ],
   "source": "https://github.com/crayfishx/puppet-firewalld",
