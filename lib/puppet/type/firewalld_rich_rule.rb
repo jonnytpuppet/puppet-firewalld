@@ -108,5 +108,16 @@ Puppet::Type.newtype(:firewalld_rich_rule) do
     self[:zone]
   end
 
+  validate do
+    MANDATORY_PROPS = [:zone]
+    missing = []
+
+    MANDATORY_PROPS.each do |prop|
+      missing << prop unless value(prop)
+    end
+
+    self.fail "The following properties are mandatory: #{missing}" unless missing.empty?
+  end
+
 
 end

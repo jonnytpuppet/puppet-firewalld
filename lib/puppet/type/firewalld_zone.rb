@@ -214,6 +214,4 @@ Puppet::Type.newtype(:firewalld_zone) do
     end
     return purge_ports
   end
-
 end
-

@@ -39,4 +39,15 @@ Puppet::Type.newtype(:firewalld_service) do
       res.title == "Firewalld::Custom_service[#{self[:service]}]"
     }
   end
+
+  validate do
+    MANDATORY_PROPS = [:zone, :service]
+    missing = []
+
+    MANDATORY_PROPS.each do |prop|
+      missing << prop unless value(prop)
+    end
+
+    self.fail "The following properties are mandatory: #{missing}" unless missing.empty?
+  end
 end
